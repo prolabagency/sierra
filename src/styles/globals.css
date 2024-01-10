@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Geologica';
+  src: url('/font/Geologica/Geologica-VariableFont_CRSV\,SHRP\,slnt\,wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'RubikDirt';
+  src: url('/font/Rubik_Dirt/RubikDirt-Regular.ttf') format('truetype');
+}
+
+
+.food-title {
+  position: relative;
+  padding-bottom: 17px;
+}
+
+.food-title::after {
+  content: url(/vectors/Vector.png);
+  width: 100%;
+  display: block;
+
+  position: absolute;
+
+  bottom: -17px;
+  right: -50px;
+}
+
+
+
+.text_white {
+  position: absolute;
+  color: #FFF;
+  width: 100%;
+  top: 0;
+  text-align: center;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: 'dlig' on;
+  font-size: 48px;
+  z-index: -1;
+  font-style: normal;
+  text-align: center;
+  font-weight: 400;
+  left: 1px;
+}
+.my-food-swiper.swiper-slide img {
+  border-radius: 50%;
+}
+.my-food-swiper.swiper-slide-active img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  transition: all .4s ease-in-out;
+}
+
+.my-food-swiper.swiper-slide-next img {
+  transition: transform .4s ease-in-out;
+  transform:  rotate(45deg);
+}
+
+
+.my-food-swiper.swiper-slide-prev img {
+  object-fit: cover;
+  transition: transform .4s ease-in-out;
+  transform:  rotate(-45deg); 
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.swiper {
+  margin: 0 !important;
+}
+
+.sel-no {
+  accent-color: transparent;
+  user-select: none;
+
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  background-image: url('/Back.webp');
+  /* background-position: center; */
+  background-size: cover;
+  background-repeat: no-repeat;
+}
