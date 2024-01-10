@@ -6,6 +6,9 @@ const nextConfig = {
     defaultLocale: 'ru',
     localeDetection: false,
   },
+  images: {
+    domains: ['online-back-8jc6.onrender.com'],
+  },
 }
 
 module.exports = nextConfig

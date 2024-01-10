@@ -10,7 +10,7 @@ import TextSpace from '../UI/TextSpace';
 import ImgLoader from '../UI/ImgLoader';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 import 'swiper/css/effect-coverflow';
-
+import Image from 'next/image';
 
 interface Props {
     data: SubcatType[] | null,
@@ -95,7 +95,7 @@ export default function Index({ cat }: { cat: CategoryType }) {
                                                             }
                                                             {/* <h1 className='text-white text-[24px] mb-4 mt-4 text-center'>{locale == 'ru' ? item.title ?? item.title_ky : item.title_ky ?? item.title} </h1> */}
                                                             <div className='w-full justify-center items-center flex'>
-                                                                <ImgLoader src={`https://online-back-8jc6.onrender.com${item.img}`} />
+                                                                <Image width={300} height={300} src={`https://online-back-8jc6.onrender.com${item.img}`} alt="Img" />
                                                             </div>
                                                         </div>
                                                     </div>
