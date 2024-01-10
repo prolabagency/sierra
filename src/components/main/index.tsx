@@ -7,7 +7,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { useRouter } from 'next/router';
 import TextSpace from '../UI/TextSpace';
-import ImgLoader from '../UI/ImgLoader';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 import 'swiper/css/effect-coverflow';
 import Image from 'next/image';
