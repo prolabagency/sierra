@@ -19,7 +19,7 @@ interface Props {
 }
 
 
-export default function index({ cat }: { cat: CategoryType }) {
+export default function Index({ cat }: { cat: CategoryType }) {
     const { locale } = useRouter()
     const [{ data, loading, error }, setData] = useState<Props>({
         data: null,
@@ -57,60 +57,56 @@ export default function index({ cat }: { cat: CategoryType }) {
                             return null
                         }
                         return (
-                            <div>
-                                <SwiperSlide key={item._id}>
-                                    <div className={`w-full h-full`}>
-                                        <TextSpace text={locale == 'ru' ? item.title : item.title_ky ?? item.title} />
-                                        <Swiper
-                                            className='m-0 w-full'
-                                            slidesPerView={1}
-                                            centeredSlides
-                                            initialSlide={0}
-                                            modules={[EffectCoverflow, Pagination]}
-                                            effect='coverflow'
-                                            coverflowEffect={{
-                                                rotate: 0,
-                                                stretch: 150,
-                                                depth: 200,
-                                                modifier: 1,
-                                                slideShadows: false,
-                                                scale: .4,
-                                            }}
-                                            direction='horizontal'
-                                            speed={400}
-                                            scrollbar={{ draggable: true }}
-                                            onSlideChange={(swiper) => setACtivedItem(swiper.activeIndex)}
-                                        >
-                                            {item.value.map((item: FoodsType, index) => {
+                            <SwiperSlide key={item._id}>
+                                <div className={`w-full h-full`}>
+                                    <TextSpace text={locale == 'ru' ? item.title : item.title_ky ?? item.title} />
+                                    <Swiper
+                                        className='m-0 w-full'
+                                        slidesPerView={1}
+                                        centeredSlides
+                                        initialSlide={0}
+                                        modules={[EffectCoverflow, Pagination]}
+                                        effect='coverflow'
+                                        coverflowEffect={{
+                                            rotate: 0,
+                                            stretch: 150,
+                                            depth: 200,
+                                            modifier: 1,
+                                            slideShadows: false,
+                                            scale: .4,
+                                        }}
+                                        direction='horizontal'
+                                        speed={400}
+                                        scrollbar={{ draggable: true }}
+                                        onSlideChange={(swiper) => setACtivedItem(swiper.activeIndex)}
+                                    >
+                                        {item.value.map((item: FoodsType, index) => {
 
-                                                return (
-                                                    <div>
+                                            return (
 
-                                                        <SwiperSlide className='h-full w-[80%] my-food-swiper min-w-[300px] ' key={item._id}>
+                                                <SwiperSlide className='h-full w-[80%] my-food-swiper min-w-[300px] ' key={item._id}>
 
-                                                            <div className={`w-full h-full overflow-hidden flex justify-center items-center`}>
-                                                                <div className='w-full'>
-                                                                    {
-                                                                        activedItem == index ?
-                                                                            <h1 className='text-white text-[24px] mb-4 mt-4 text-center'>{locale == 'ru' ? item.title ?? item.title_ky : item.title_ky ?? item.title} </h1>
-                                                                            : null
-                                                                    }
-                                                                    {/* <h1 className='text-white text-[24px] mb-4 mt-4 text-center'>{locale == 'ru' ? item.title ?? item.title_ky : item.title_ky ?? item.title} </h1> */}
-                                                                    <div className='w-full justify-center items-center flex'>
-                                                                        <ImgLoader src={`https://online-back-8jc6.onrender.com${item.img}`} />
-                                                                    </div>
-                                                                </div>
+                                                    <div className={`w-full h-full overflow-hidden flex justify-center items-center`}>
+                                                        <div className='w-full'>
+                                                            {
+                                                                activedItem == index ?
+                                                                    <h1 className='text-white text-[24px] mb-4 mt-4 text-center'>{locale == 'ru' ? item.title ?? item.title_ky : item.title_ky ?? item.title} </h1>
+                                                                    : null
+                                                            }
+                                                            {/* <h1 className='text-white text-[24px] mb-4 mt-4 text-center'>{locale == 'ru' ? item.title ?? item.title_ky : item.title_ky ?? item.title} </h1> */}
+                                                            <div className='w-full justify-center items-center flex'>
+                                                                <ImgLoader src={`https://online-back-8jc6.onrender.com${item.img}`} />
                                                             </div>
-                                                        </SwiperSlide>
+                                                        </div>
                                                     </div>
+                                                </SwiperSlide>
 
-                                                )
-                                            })
-                                            }
-                                        </Swiper>
-                                    </div>
-                                </SwiperSlide>
-                            </div>
+                                            )
+                                        })
+                                        }
+                                    </Swiper>
+                                </div>
+                            </SwiperSlide>
 
 
                         )

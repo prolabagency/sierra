@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-
+import Image from 'next/image'
 export default function ImgLoader({ src }: { src: string }) {
     const [loading, setLoading] = useState(true)
     return (
         <div className='loader-img'>
-            <img onLoad={() => setLoading(false)} className={`${loading ? 'hidden' : ''}`} src={src} alt="Img" />
+            <Image onLoad={() => setLoading(false)} className={`${loading ? 'hidden' : ''}`} src={src} alt="Img" />
             {
                 loading ? <div className="grid min-h-[140px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
                     <svg className="w-16 h-16 animate-spin text-primary" viewBox="0 0 64 64" fill="none"

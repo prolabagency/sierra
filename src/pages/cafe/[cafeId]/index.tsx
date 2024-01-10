@@ -58,7 +58,7 @@ export const getStaticProps: GetStaticProps<MyProps> = async ({ params }) => {
 };
 
 
-export default function index({ data, error }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Index({ data, error }: InferGetStaticPropsType<typeof getStaticProps>) {
     const { locale } = useRouter()
     const [activeIndex, setActiveIndex] = useState(0);
     return (

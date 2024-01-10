@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 
-export default function index() {
+export default function Index() {
     const { locale, asPath } = useRouter()
     return (
         <div className='w-full justify-center py-[17.5px] px-[16px]'>
