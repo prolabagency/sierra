@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React, {  useState } from 'react'
 import axios from '@/axios'
 import Header from '@/components/header'
-import { CafeType, CategoryType } from '@/types'
+import { CategoryType } from '@/types'
 import { useRouter } from 'next/router'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next/types';
+import { GetStaticProps, InferGetStaticPropsType } from 'next/types';
 import Loading from '@/components/UI/Loading'
 import Main from '@/components/main'
-import { CartProvider } from '@/hooks/CartContext'
+import { CartProvider } from '@/hoc/CartContext'
 
 
 
@@ -49,7 +49,7 @@ export default function Index({ data, error }: InferGetStaticPropsType<typeof ge
   const [activeIndex, setActiveIndex] = useState(0);
   return (
     <CartProvider>
-      <div className='w-full relative font-geo'>
+      <div className='w-full relative font-geo page-slide'>
         <Header />
         <div className='sel-no w-full py-3 flex flex-col gap-4'>
           <Swiper

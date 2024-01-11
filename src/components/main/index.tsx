@@ -30,10 +30,8 @@ export default function Index({ cat }: { cat: CategoryType }) {
     })
     const [activedItem, setACtivedItem] = useState<FoodsType | undefined>(undefined)
     const [activedCatIndex, setActivedCatIndex] = useState(0)
-    const [activeIndex, setActivedIndex] = useState(0)
     const [changedItem, setChangeItem] = useState<FoodsType | null>(null)
     const [activeSwiper, setActiveSwipers] = useState<any>({ 0: 0 })
-
     useEffect(() => {
         if (cat) {
             axios.get(`/subcats/${cat._id}`)
@@ -48,11 +46,8 @@ export default function Index({ cat }: { cat: CategoryType }) {
                 .catch((err) => setData(prev => ({ ...prev, error: err?.response?.data.error ?? "Ошибка при получении", loading: false })))
         }
     }, [cat])
-    console.log(activeSwiper);
-
-
     return (
-        <div className='flex w-full flex-col h-[85vh] main-container'>
+        <div className='flex w-full flex-col h-[85vh] main-container '>
             {
                 changedItem ? <Single_Page item={changedItem} setClose={setChangeItem} /> : null
             }
@@ -61,7 +56,7 @@ export default function Index({ cat }: { cat: CategoryType }) {
             }
             {
                 (data && data.length > 0) ? <Swiper
-                    className='m-0 w-full h-[380px]'
+                    className='m-0 w-full h-[380px] page-slide'
                     slidesPerView={1}
                     direction='vertical'
                     initialSlide={0}
@@ -106,7 +101,6 @@ export default function Index({ cat }: { cat: CategoryType }) {
                                         scrollbar={{ draggable: true }}
                                         onSlideChange={(swiper) => {
                                             setActiveSwipers((prev: any) => ({ ...prev, [activedCatIndex]: swiper.activeIndex }))
-                                            setActivedIndex(swiper.activeIndex)
                                             setACtivedItem(item?.value ? item.value[swiper.activeIndex] : undefined)
                                         }}
                                     >
@@ -162,7 +156,7 @@ export default function Index({ cat }: { cat: CategoryType }) {
             }
             {
                 (data?.length == 0) ?
-                    <div className={`w-full px-4 relative m-0 overflow-hidden h-full flex justify-center items-center`}>
+                    <div className={`w-full px-4 relative m-0 overflow-hidden h-full flex justify-center items-center page-slide`}>
                         <TextSpace line={true} text={locale == 'ru' ? 'Ой а тут пусто :(' : "Ой бул жерде бош :("} />
                     </div>
                     : null

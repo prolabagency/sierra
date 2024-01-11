@@ -12,12 +12,63 @@
   src: url('/font/Rubik_Dirt/RubikDirt-Regular.ttf') format('truetype');
 }
 
+@keyframes slideView {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideViewClose {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+
+  }
+}
+
+@keyframes pageSlide {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+
+.page-slide {
+  animation: pageSlide .3s linear;
+}
+
+
+
+.singe_page_container {
+  animation: slideView .1s linear;
+}
+
+
+
+
+.singe_page_container-closed {
+  animation: slideViewClose .1s linear;
+}
 
 .food-title {
   position: relative;
   padding-bottom: 17px;
 }
-.cart-block img {
+
+.cart-block>img {
   border-radius: 50%;
   width: 120px;
   height: 120px;

@@ -1,4 +1,4 @@
-import { useCart } from '@/hooks/CartContext'
+import { useCart } from '@/hoc/CartContext'
 import { FoodsType } from '@/types'
 import React from 'react'
 import Image from 'next/image'
@@ -31,7 +31,7 @@ export default function Layout() {
     }
     console.log(state);
     return (
-        <div className='w-full flex flex-col pt-8 h-[75vh] overflow-y-auto overflow-x-hidden'>
+        <div className='w-full sel-no flex flex-col pt-8 h-[75vh] overflow-y-auto overflow-x-hidden'>
             {
                 state.length ? <div className='w-full absolute bottom-12 flex justify-center'>
                     <button onClick={() => {

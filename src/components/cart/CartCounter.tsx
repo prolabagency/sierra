@@ -2,7 +2,7 @@ import { FoodsType } from '@/types'
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useCart } from '@/hooks/CartContext'
+import { useCart } from '@/hoc/CartContext'
 export default function CartCounter({ item }: { item: FoodsType }) {
     const { state, dispatch } = useCart()
     const { locale } = useRouter()

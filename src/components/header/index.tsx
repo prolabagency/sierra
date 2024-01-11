@@ -1,5 +1,5 @@
 'use client'
-import { useCart } from '@/hooks/CartContext'
+import { useCart } from '@/hoc/CartContext'
 import { FoodsType } from '@/types'
 import Link from 'next/link'
 import { useRouter } from 'next/router'

@@ -3,10 +3,11 @@ import { useRouter } from 'next/router'
 import React, { SetStateAction, useEffect, useState } from 'react'
 import Image from 'next/image'
 import TextSpace from '../UI/TextSpace'
-import { useCart } from '@/hooks/CartContext'
+import { useCart } from '@/hoc/CartContext'
 
 export default function Single_Page({ item, setClose }: { item: FoodsType, setClose: React.Dispatch<SetStateAction<FoodsType | null>> }) {
     const { state, dispatch } = useCart()
+    const [disActived, setDis] = useState(false)
     const [isCart, setCart] = useState(false)
     const { locale } = useRouter()
     useEffect(() => {
@@ -30,9 +31,14 @@ export default function Single_Page({ item, setClose }: { item: FoodsType, setCl
     }
     const recipe = locale == 'ru' ? item.recipe : item.recipe_ky
     return (
-        <div className='absolute left-0 top-0 z-30 w-full h-screen flex justify-center items-center popup-modal pt-5'>
+        <div className={`absolute left-0 top-0 z-30 w-full h-screen singe_page_container flex ${disActived ? 'singe_page_container-closed' : ''} justify-center items-center popup-modal pt-5`}>
             <div className='relative w-full h-screen'>
-                <button className='absolute top-3 right-4 z-40' onClick={() => setClose(null)}>
+                <button className='absolute top-3 right-4 z-40' onClick={() => {
+                    setDis(true)
+                    setTimeout(() => {
+                        setClose(null)
+                    }, 90)
+                }}>
                     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M14 25.6667C20.4434 25.6667 25.6667 20.4434 25.6667 14C25.6667 7.55672 20.4434 2.33337 14 2.33337C7.55672 2.33337 2.33337 7.55672 2.33337 14C2.33337 20.4434 7.55672 25.6667 14 25.6667Z" stroke="white" strokeWidth="2" />
                         <path d="M16.9167 11.0834L11.0834 16.9167M11.0834 11.0834L16.9167 16.9167" stroke="white" strokeWidth="2" strokeLinecap="round" />
