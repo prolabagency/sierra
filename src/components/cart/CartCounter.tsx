@@ -2,14 +2,14 @@ import { FoodsType } from '@/types'
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { useCart } from '@/hooks/CartContext'
 export default function CartCounter({ item }: { item: FoodsType }) {
+    const { state, dispatch } = useCart()
     const { locale } = useRouter()
-    const [cart, setCart] = useState<FoodsType[]>([])
     const [itemVal, setItemVal] = useState<any>({})
     const [isCart, setIsCart] = useState(false)
     useEffect(() => {
-        let myCart = JSON.parse(localStorage.getItem('cart') ?? '[]')
-        let myChangedItem = myCart.find((el: FoodsType) => el._id == item._id)
+        let myChangedItem = state.find((el: FoodsType) => el._id == item._id)
         if (myChangedItem) {
             setItemVal(({ ...item, count: myChangedItem.count }))
             setIsCart(true)
@@ -17,29 +17,30 @@ export default function CartCounter({ item }: { item: FoodsType }) {
             setIsCart(false)
             setItemVal({ ...item, count: 1 })
         }
-        setCart(myCart)
     }, [item._id])
-
-
-    useEffect(() => {
-        let data = cart.map(el => el._id == item._id ? itemVal : el)
-        localStorage.setItem('cart', JSON.stringify(data))
-    }, [itemVal.count, cart])
 
 
     const handlePlus = () => {
         setItemVal((prev: any) => ({ ...prev, count: prev.count + 1 }))
+        let data = state.map((el: FoodsType) => el._id == item._id ? { ...el, count: el.count + 1 } : el)
+        localStorage.setItem('cart', JSON.stringify(data))
     }
     const handleMinus = () => {
         if (itemVal.count > 1) {
             setItemVal((prev: any) => ({ ...prev, count: prev.count - 1 }))
+            let data = state.map((el: FoodsType) => el._id == item._id ? { ...el, count: el.count - 1 } : el)
+            localStorage.setItem('cart', JSON.stringify(data))
         }
     }
     const handleAdd = () => {
         if (isCart) {
-            setCart(prev => prev.filter(el => el._id != item._id))
+            let data = state.filter((el: FoodsType) => el._id != item._id)
+            localStorage.setItem('cart', JSON.stringify(data))
+            dispatch(data)
         } else {
-            setCart(prev => [...prev, itemVal])
+            let data = [itemVal, ...state]
+            dispatch(data)
+            localStorage.setItem('cart', JSON.stringify(data))
         }
         setIsCart(prev => !prev)
     }

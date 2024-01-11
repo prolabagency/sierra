@@ -1,4 +1,5 @@
 'use client'
+import { useCart } from '@/hooks/CartContext'
 import { FoodsType } from '@/types'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -6,11 +7,8 @@ import React, { useEffect, useState } from 'react'
 
 export default function Index() {
     const { locale, asPath } = useRouter()
-    const [cart, setCart] = useState<FoodsType[]>([])
-    useEffect(() => {
-        let myData = JSON.parse(localStorage.getItem('cart') ?? '[]')
-        setCart(myData)
-    }, [])
+    const {state, dispatch} = useCart()
+  
     return (
         <div className='w-full justify-center py-[17.5px] px-[16px]'>
             <nav className='w-full  flex justify-between gap-10'>
@@ -23,7 +21,7 @@ export default function Index() {
                 <div className='flex items-center gap-4 sel-no'>
                     <Link href={'/cart'}>
                         {
-                            cart.length ?
+                            state.length ?
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M3.74201 18.555C4.94201 20 7.17401 20 11.639 20H12.361C16.826 20 19.059 20 20.259 18.555M3.74201 18.555C2.54201 17.109 2.95401 14.915 3.77701 10.525C4.36201 7.405 4.65401 5.844 5.76501 4.922M20.259 18.555C21.459 17.109 21.047 14.915 20.224 10.525C19.639 7.405 19.346 5.844 18.235 4.922M18.235 4.922C17.125 4 15.536 4 12.361 4H11.639C8.46401 4 6.87601 4 5.76501 4.922" stroke="white" strokeWidth="1.5" />
                                     <path d="M9.17004 8C9.37665 8.58553 9.75978 9.09257 10.2666 9.45121C10.7735 9.80986 11.3791 10.0025 12 10.0025C12.621 10.0025 13.2266 9.80986 13.7334 9.45121C14.2403 9.09257 14.6234 8.58553 14.83 8" stroke="white" strokeWidth="1.5" strokeLinecap="round" />

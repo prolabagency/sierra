@@ -26,7 +26,8 @@ export type FoodsType = {
     recipe_ky: string[]
     size: string
     title: string
-    title_ky: string
+    title_ky: string,
+    count: number,
     updatedAt: string
 }
 

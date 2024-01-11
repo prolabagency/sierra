@@ -18,6 +18,33 @@
   padding-bottom: 17px;
 }
 
+.cart-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.right-line::before {
+  content: url(/vectors/Vector.png);
+  width: 100%;
+  display: block;
+  position: absolute;
+  top: -17px;
+  right: -100px;
+}
+
+.left-line::before {
+  content: url(/vectors/Vector.png);
+  width: 100%;
+  display: block;
+  position: absolute;
+  top: -8px;
+  transform: rotate(180deg);
+  left: -100px;
+
+}
+
 .food-title::after {
   content: url(/vectors/Vector.png);
   width: 100%;
@@ -27,7 +54,9 @@
   right: -50px;
 }
 
-
+.white-image {
+  filter: brightness(0) invert(1) grayscale(100%) contrast(1000%);
+}
 
 .text_white {
   position: absolute;
@@ -91,6 +120,12 @@
   transform: rotate(45deg);
 }
 
+.popup-modal {
+  background-image: url('/Back.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 
 .my-food-swiper.swiper-slide-prev img {
   object-fit: cover;
@@ -134,4 +169,5 @@ body {
   /* background-position: center; */
   background-size: cover;
   background-repeat: no-repeat;
+  height: 100vh;
 }
