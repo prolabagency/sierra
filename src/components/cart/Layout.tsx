@@ -45,7 +45,7 @@ export default function Layout() {
             {
                 state.length ? state.map((item: FoodsType, index: number) => (
                     <div key={item._id} className={`${!(index % 2) ? 'right-line' : 'left-line'} relative w-full flex `}>
-                        <div className='w-full justify-start my-5 flex px-4 relative gap-2 items-center'>
+                        <div className='w-full cart-block justify-start my-5 flex px-4 relative gap-2 items-center'>
                             <button onClick={() => handleDelete(item)} className='absolute top-4 right-5'>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#DE9393" strokeWidth="1.5" />

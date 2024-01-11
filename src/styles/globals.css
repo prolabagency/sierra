@@ -17,6 +17,10 @@
   position: relative;
   padding-bottom: 17px;
 }
+.cart-block img {
+  border-radius: 50%;
+  object-fit: cover;
+}
 
 .cart-img {
   width: 100px;
