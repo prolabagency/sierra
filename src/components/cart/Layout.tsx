@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import TextSpace from '../UI/TextSpace'
 import Link from 'next/link'
+import ImageLoader from '../UI/ImageLoader'
 
 export default function Layout() {
     const { state, dispatch } = useCart()
@@ -52,7 +53,7 @@ export default function Layout() {
                                 </svg>
 
                             </button>
-                            <Image className='cart-img' width={120} height={120} src={`https://online-back-8jc6.onrender.com${item.img}`} alt="Img" />
+                            <ImageLoader width={100} height={100} src={`https://online-back-8jc6.onrender.com${item.img}`} />
                             <div className='w-full flex flex-col justify-start gap-1'>
                                 <h1 className='text-white text-[24px] pl-1 '>{locale == 'ru' ? item.title ?? item.title_ky : item.title_ky ?? item.title} </h1>
                                 <div className='flex items-center'>

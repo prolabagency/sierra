@@ -54,9 +54,7 @@
   right: -50px;
 }
 
-.white-image {
-  filter: brightness(0) invert(1) grayscale(100%) contrast(1000%);
-}
+
 
 .text_white {
   position: absolute;

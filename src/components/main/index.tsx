@@ -12,6 +12,7 @@ import 'swiper/css/effect-coverflow';
 import Image from 'next/image';
 import CartCounter from '../cart/CartCounter';
 import Single_Page from '../popup/Single_Page';
+import ImageLoader from '../UI/ImageLoader';
 
 interface Props {
     data: SubcatType[] | null,
@@ -42,7 +43,7 @@ export default function Index({ cat }: { cat: CategoryType }) {
                         setACtivedItem(undefined)
                     }
                     setACtivedItem(res.data[0].value[0])
-                    setActiveSwipers({0: 0})
+                    setActiveSwipers({ 0: 0 })
                 })
                 .catch((err) => setData(prev => ({ ...prev, error: err?.response?.data.error ?? "Ошибка при получении", loading: false })))
         }
@@ -60,7 +61,7 @@ export default function Index({ cat }: { cat: CategoryType }) {
             }
             {
                 (data && data.length > 0) ? <Swiper
-                    className='m-0 w-full'
+                    className='m-0 w-full h-[380px]'
                     slidesPerView={1}
                     direction='vertical'
                     initialSlide={0}
@@ -86,7 +87,7 @@ export default function Index({ cat }: { cat: CategoryType }) {
                                 <div className={`w-full`}>
                                     <TextSpace text={locale == 'ru' ? item.title || item.title_ky : item.title_ky || item.title} />
                                     <Swiper
-                                        className='m-0 w-full min-h-[300px] overflow-auto flex justify-center items-center'
+                                        className='m-0 w-full h-full overflow-auto flex justify-center items-center'
                                         slidesPerView={1}
                                         initialSlide={0}
                                         centeredSlides
@@ -122,7 +123,8 @@ export default function Index({ cat }: { cat: CategoryType }) {
                                                                 }
 
                                                                 <div className='w-full justify-center items-center flex h-full'>
-                                                                    <Image width={250} height={250} src={`https://online-back-8jc6.onrender.com${item.img}`} alt="Img" />
+                                                                    <ImageLoader width={250} height={250} src={`https://online-back-8jc6.onrender.com${item.img}`}  />
+                                                                    {/* <img width={250} height={250} src={`https://online-back-8jc6.onrender.com${item.img}`} alt="Img" /> */}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -142,7 +144,7 @@ export default function Index({ cat }: { cat: CategoryType }) {
                 </Swiper> : null
             }
             {
-                activedItem ? <div className='w-full min-h-40 on-line absolute bottom-12 z-10'>
+                activedItem ? <div className='w-full min-h-40 on-line relative bottom-0 z-10'>
                     <div className='px-4 py-2'>
                         <div className='flex flex-col'>
                             <p className='text-white font-light food-desc'>{locale == 'ru' ? activedItem.desc || activedItem.desc_ky : activedItem.desc_ky || activedItem.desc}</p>
