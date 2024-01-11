@@ -1,10 +1,16 @@
 'use client'
+import { FoodsType } from '@/types'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function Index() {
     const { locale, asPath } = useRouter()
+    const [cart, setCart] = useState<FoodsType[]>([])
+    useEffect(() => {
+        let myData = JSON.parse(localStorage.getItem('cart') ?? '[]')
+        setCart(myData)
+    }, [])
     return (
         <div className='w-full justify-center py-[17.5px] px-[16px]'>
             <nav className='w-full  flex justify-between gap-10'>
@@ -16,10 +22,20 @@ export default function Index() {
                 </label>
                 <div className='flex items-center gap-4 sel-no'>
                     <Link href={'/cart'}>
-                        <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.74201 15.555C2.94201 17 5.17401 17 9.63901 17H10.361C14.826 17 17.059 17 18.259 15.555M1.74201 15.555C0.542013 14.109 0.954013 11.915 1.77701 7.525C2.36201 4.405 2.65401 2.844 3.76501 1.922M18.259 15.555C19.459 14.109 19.047 11.915 18.224 7.525C17.639 4.405 17.346 2.844 16.235 1.922M16.235 1.922C15.125 1 13.536 1 10.361 1H9.63901C6.46401 1 4.87601 1 3.76501 1.922" stroke="white" strokeWidth="1.5" />
-                            <path d="M7.16998 5C7.37658 5.58553 7.75972 6.09257 8.26658 6.45121C8.77344 6.80986 9.37907 7.00245 9.99998 7.00245C10.6209 7.00245 11.2265 6.80986 11.7334 6.45121C12.2402 6.09257 12.6234 5.58553 12.83 5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-                        </svg>
+                        {
+                            cart.length ?
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.74201 18.555C4.94201 20 7.17401 20 11.639 20H12.361C16.826 20 19.059 20 20.259 18.555M3.74201 18.555C2.54201 17.109 2.95401 14.915 3.77701 10.525C4.36201 7.405 4.65401 5.844 5.76501 4.922M20.259 18.555C21.459 17.109 21.047 14.915 20.224 10.525C19.639 7.405 19.346 5.844 18.235 4.922M18.235 4.922C17.125 4 15.536 4 12.361 4H11.639C8.46401 4 6.87601 4 5.76501 4.922" stroke="white" strokeWidth="1.5" />
+                                    <path d="M9.17004 8C9.37665 8.58553 9.75978 9.09257 10.2666 9.45121C10.7735 9.80986 11.3791 10.0025 12 10.0025C12.621 10.0025 13.2266 9.80986 13.7334 9.45121C14.2403 9.09257 14.6234 8.58553 14.83 8" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+                                    <circle cx="19" cy="5" r="4.5" fill="#F49D37" stroke="black" />
+                                </svg>
+                                :
+                                <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.74201 15.555C2.94201 17 5.17401 17 9.63901 17H10.361C14.826 17 17.059 17 18.259 15.555M1.74201 15.555C0.542013 14.109 0.954013 11.915 1.77701 7.525C2.36201 4.405 2.65401 2.844 3.76501 1.922M18.259 15.555C19.459 14.109 19.047 11.915 18.224 7.525C17.639 4.405 17.346 2.844 16.235 1.922M16.235 1.922C15.125 1 13.536 1 10.361 1H9.63901C6.46401 1 4.87601 1 3.76501 1.922" stroke="white" strokeWidth="1.5" />
+                                    <path d="M7.16998 5C7.37658 5.58553 7.75972 6.09257 8.26658 6.45121C8.77344 6.80986 9.37907 7.00245 9.99998 7.00245C10.6209 7.00245 11.2265 6.80986 11.7334 6.45121C12.2402 6.09257 12.6234 5.58553 12.83 5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+                                </svg>
+                        }
+
                     </Link>
                     <div className='flex text-white gap-2 text-[14px]'>
                         <Link href={asPath} locale='ru' className={`hover:text-primary ${locale == 'ru' ? 'text-primary' : ''}`}>
