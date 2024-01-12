@@ -47,21 +47,9 @@ export const getStaticProps: GetStaticProps<MyProps> = async () => {
 export default function Index({ data, error }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { locale } = useRouter()
   const [activeIndex, setActiveIndex] = useState(0);
-  const [preload, setPreload] = useState(false)
-  useEffect(() => {
-    let myPreload = sessionStorage.getItem('preload')
-    if (!myPreload) {
-      setPreload(true)
-      setTimeout(() => {
-        setPreload(false)
-      }, 300)
-      sessionStorage.setItem('preload', 'true')
-    } 
-  }, [])
   return (
     <CartProvider>
       <div className='w-full relative font-geo page-slide'>
-        <div id={`${preload ? 'preloader' : ''}`}></div>
         <Header />
         <div className='sel-no w-full py-3 flex flex-col gap-4'>
           <Swiper

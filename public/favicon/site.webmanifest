@@ -1,17 +1,16 @@
 {
     "name": "Sierra",
-    "short_name": "Sierra",
     "description": "Welcome to Sierra!",
     "icons": [
         {
-            "src": "../Back.webp",
-            "sizes": "full",
-            "type": "image/webp"
+            "src": "/favicon.ico",
+            "sizes": "any",
+            "type": "image/png"
         },
         {
-            "src": "../Back.webp",
-            "sizes": "full",
-            "type": "image/webp"
+            "src": "/favicon.ico",
+            "sizes": "any",
+            "type": "image/png"
         }
     ],
     "theme_color": "#ffffff",

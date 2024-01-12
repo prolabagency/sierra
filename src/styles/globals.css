@@ -38,6 +38,7 @@
     transform: translateY(-100%);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -195,8 +196,13 @@
   overflow: hidden;
 }
 
+square150x150logo {
+  width: 100vw;
+  height: 100vh;
+}
+
 #preloader {
-  background: url("/Back.webp") center center no-repeat;
+  background: url("/favicon/preloader.webp") center center no-repeat;
   background-size: cover;
   position: fixed;
   top: 0;
@@ -205,6 +211,7 @@
   height: 100%;
   z-index: 1000;
 }
+
 * {
   margin: 0;
   padding: 0;

@@ -14,7 +14,6 @@ export default function Document() {
         <meta name="theme-color" content="#3c2f2f"></meta>
         <link rel="manifest" href="/favicon/site.webmanifest" />
         <meta name="msapplication-TileColor" content="#2b5797" />
-        <meta name="theme-color" content="#ffffff"></meta>
       </Head>
 
       <body className='w-full'>
