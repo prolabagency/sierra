@@ -9,7 +9,10 @@ export default function ImageLoader({ src, width, height }: ImageLoaderProps) {
     const [error, setError] = useState(false)
     return (
         <>
-            <img onError={() => setError(true)} className={`${loading ? 'hidden' : ''}`} onLoad={() => setLoading(false)} width={width} height={height} src={src} alt="Img" />
+            <img onError={(e) => {
+                console.log(e);
+                setError(true)
+            }} className={`${loading ? 'hidden' : ''}`} onLoad={() => setLoading(false)} width={width} height={height} src={src} alt="Img" />
             {
                 loading && !error ?
                     <div className="grid min-h-[140px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">

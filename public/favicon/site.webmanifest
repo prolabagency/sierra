@@ -1,6 +1,7 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "Sierra",
+    "short_name": "Sierra",
+    "description": "Welcome to Sierra!",
     "icons": [
         {
             "src": "/favicon.ico",
