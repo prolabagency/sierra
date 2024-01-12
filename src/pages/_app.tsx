@@ -15,6 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover" />
         <meta name="theme-color" content="#00000"></meta>
         <link rel="manifest" href="/manifest.json" />
+        <meta name="apple-mobile-web-app-capable" content="yes"></meta>
         <meta name="msapplication-TileColor" content="#2b5797" />
         <link
           rel="apple-touch-startup-image"
