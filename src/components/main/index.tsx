@@ -106,24 +106,21 @@ export default function Index({ cat }: { cat: CategoryType }) {
                                     >
                                         {item.value.map((item: FoodsType, index) => {
                                             return (
-                                                <>
-                                                    <SwiperSlide className='h-full w-[80%] my-food-swiper min-w-[300px] myfood-swiper-slide' key={item._id}>
-                                                        <div className={`w-full h-full flex justify-center items-center mb-4`}>
-                                                            <div className='w-full flex flex-col justify-center items-center gap-3'>
-                                                                {
-                                                                    activeSwiper[activedCatIndex] == index ?
-                                                                        <h1 className='text-white text-[24px] mt-2 text-center'>{locale == 'ru' ? item.title ?? item.title_ky : item.title_ky ?? item.title} </h1>
-                                                                        : null
-                                                                }
+                                                <SwiperSlide className='h-full w-[80%] my-food-swiper min-w-[300px] myfood-swiper-slide' key={item._id}>
+                                                    <div className={`w-full h-full flex justify-center items-center mb-4`}>
+                                                        <div className='w-full flex flex-col justify-center items-center gap-3'>
+                                                            {
+                                                                activeSwiper[activedCatIndex] == index ?
+                                                                    <h1 className='text-white text-[24px] mt-2 text-center'>{locale == 'ru' ? item.title ?? item.title_ky : item.title_ky ?? item.title} </h1>
+                                                                    : null
+                                                            }
 
-                                                                <div className='w-full justify-center items-center flex h-full'>
-                                                                    <ImageLoader width={250} height={250} src={`https://online-back-8jc6.onrender.com${item.img}`}  />
-                                                                    {/* <img width={250} height={250} src={`https://online-back-8jc6.onrender.com${item.img}`} alt="Img" /> */}
-                                                                </div>
+                                                            <div className='w-full justify-center items-center flex h-full'>
+                                                                <ImageLoader width={250} height={250} src={`https://online-back-8jc6.onrender.com${item.img}`} />
                                                             </div>
                                                         </div>
-                                                    </SwiperSlide>
-                                                </>
+                                                    </div>
+                                                </SwiperSlide>
                                             )
                                         })
                                         }

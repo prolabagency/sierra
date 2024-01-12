@@ -6,11 +6,12 @@ interface ImageLoaderProps {
 }
 export default function ImageLoader({ src, width, height }: ImageLoaderProps) {
     const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(false)
     return (
         <>
-            <img className={`${loading ? 'hidden' : ''}`} onLoad={() => setLoading(false)} width={width} height={height} src={src} alt="Img" />
+            <img onError={() => setError(true)} className={`${loading ? 'hidden' : ''}`} onLoad={() => setLoading(false)} width={width} height={height} src={src} alt="Img" />
             {
-                loading ?
+                loading && !error ?
                     <div className="grid min-h-[140px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
                         <svg className="w-16 h-16 animate-spin text-primary" viewBox="0 0 64 64" fill="none"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24">
@@ -23,6 +24,11 @@ export default function ImageLoader({ src, width, height }: ImageLoaderProps) {
                             </path>
                         </svg>
                     </div> : null
+            }
+            {
+                error ?
+                    <img width={width} height={height} src={'/defaultImg.png'} alt="Img" />
+                    : null
             }
         </>
     )
