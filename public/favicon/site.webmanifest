@@ -4,14 +4,14 @@
     "description": "Welcome to Sierra!",
     "icons": [
         {
-            "src": "/favicon.ico",
-            "sizes": "any",
-            "type": "image/png"
+            "src": "../Back.webp",
+            "sizes": "full",
+            "type": "image/webp"
         },
         {
-            "src": "/favicon.ico",
-            "sizes": "any",
-            "type": "image/png"
+            "src": "../Back.webp",
+            "sizes": "full",
+            "type": "image/webp"
         }
     ],
     "theme_color": "#ffffff",
