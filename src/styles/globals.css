@@ -207,11 +207,6 @@
 }
 
 
-square150x150logo {
-  width: 100vw;
-  height: 100vh;
-}
-
 #preloader {
   background: url("/favicon/preloader.webp") center center no-repeat;
   background-size: cover;
@@ -252,7 +247,6 @@ body {
   /* background-position: center; */
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100vh;
 }
 
 
