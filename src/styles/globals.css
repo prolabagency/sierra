@@ -196,6 +196,17 @@
   overflow: hidden;
 }
 
+
+
+.text-wrapped {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 350px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+
 square150x150logo {
   width: 100vw;
   height: 100vh;
@@ -242,5 +253,10 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
+}
+
+
+body>div {
   max-width: 370px;
+  margin: 0 auto;
 }

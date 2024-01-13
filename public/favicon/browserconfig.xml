@@ -2,7 +2,7 @@
 <browserconfig>
     <msapplication>
         <tile>
-            <square150x150logo src="/preloader.webp"/>
+            <square150x150logo src="/icon512_rounded.png"/>
         </tile>
     </msapplication>
 </browserconfig>

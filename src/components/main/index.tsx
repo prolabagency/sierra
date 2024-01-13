@@ -9,7 +9,6 @@ import { useRouter } from 'next/router';
 import TextSpace from '../UI/TextSpace';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 import 'swiper/css/effect-coverflow';
-import Image from 'next/image';
 import CartCounter from '../cart/CartCounter';
 import Single_Page from '../popup/Single_Page';
 import ImageLoader from '../UI/ImageLoader';
@@ -80,7 +79,7 @@ export default function Index({ cat }: { cat: CategoryType }) {
                         return (
                             <SwiperSlide key={item._id}>
                                 <div className={`w-full`}>
-                                    <TextSpace text={locale == 'ru' ? item.title || item.title_ky : item.title_ky || item.title} />
+                                    <TextSpace classn='text-wrapped' text={locale == 'ru' ? item.title || item.title_ky : item.title_ky || item.title} />
                                     <Swiper
                                         className='m-0 w-full h-full overflow-auto flex justify-center items-center'
                                         slidesPerView={1}

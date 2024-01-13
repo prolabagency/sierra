@@ -7,7 +7,7 @@ import Layout from '@/components/cart/Layout'
 export default function Index() {
     const { locale, asPath } = useRouter()
     return (
-        <div className='w-full font-geo page-slide '>
+        <div className='w-full h-screen font-geo page-slide '>
             <div className='w-full flex justify-between items-center sel-no px-4 py-5'>
                 <Link locale={locale} href={'/'} className='text-white text-[20px] sel-no flex items-center'>
                     <svg className='sel-no' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
