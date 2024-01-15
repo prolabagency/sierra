@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import axios from '@/axios'
 import Header from '@/components/header'
 import { CategoryType } from '@/types'
@@ -9,6 +9,7 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next/types';
 import Loading from '@/components/UI/Loading'
 import Main from '@/components/main'
 import { CartProvider } from '@/hoc/CartContext'
+import SlideNextButton from '@/hoc/IsNextSlide'
 
 
 
@@ -45,14 +46,56 @@ export const getStaticProps: GetStaticProps<MyProps> = async () => {
 
 
 export default function Index({ data, error }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const swiperRef = useRef<any>()
   const { locale } = useRouter()
   const [activeIndex, setActiveIndex] = useState(0);
+  const [{ isNext, isPrev }, setPag] = useState({
+    isNext: false,
+    isPrev: false,
+  })
+
+
+  const goToNextSlide = () => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slideNext();
+      setPag(prev => ({ isNext: false, isPrev: false }))
+    }
+  };
+
+
+  const goToPrevSlide = () => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slidePrev();
+      setPag(prev => ({ isNext: false, isPrev: false }))
+    }
+  };
+
+  if (isNext) {
+    goToNextSlide()
+    if (data && data?.length - 1 > activeIndex) {
+      setActiveIndex(prev => prev + 1)
+    } else if (data) {
+      setActiveIndex(prev => 0)
+    }
+  }
+
+  if (isPrev) {
+    goToPrevSlide()
+    if (data && activeIndex > 0) {
+      setActiveIndex(prev => prev - 1)
+    } else if (data) {
+      setActiveIndex(prev => data.length - 1)
+    }
+  }
+
+
   return (
     <CartProvider>
       <div className='current-page w-full relative font-geo page-slide'>
         <Header />
         <div className='sel-no w-full py-3 flex flex-col gap-4'>
           <Swiper
+            ref={swiperRef}
             className='m-0'
             spaceBetween={10}
             slidesPerView={3}
@@ -78,7 +121,7 @@ export default function Index({ data, error }: InferGetStaticPropsType<typeof ge
           </Swiper>
         </div>
         {
-          data ? <Main cat={data[activeIndex]} /> : null
+          data ? <Main cat={data[activeIndex]} setPagin={setPag} /> : null
         }
 
       </div >
