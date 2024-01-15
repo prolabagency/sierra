@@ -32,7 +32,7 @@ export default function Single_Page({ item, setClose }: { item: FoodsType, setCl
     }
     const recipe = locale == 'ru' ? item.recipe : item.recipe_ky
     return (
-        <div className={`absolute left-0 top-0 z-30 w-full h-screen singe_page_container flex ${disActived ? 'singe_page_container-closed' : ''} justify-center items-center popup-modal pt-5`}>
+        <div className={`absolute left-0 top-0 z-30 w-full h-full singe_page_container flex ${disActived ? 'singe_page_container-closed' : ''} justify-center items-center popup-modal pt-5`}>
             <div className='relative w-full h-screen'>
                 <button className='absolute top-3 right-4 z-40' onClick={() => {
                     setDis(true)
@@ -45,7 +45,7 @@ export default function Single_Page({ item, setClose }: { item: FoodsType, setCl
                         <path d="M16.9167 11.0834L11.0834 16.9167M11.0834 11.0834L16.9167 16.9167" stroke="white" strokeWidth="2" strokeLinecap="round" />
                     </svg>
                 </button>
-                <div className='pt-10 w-full flex flex-col h-full items-center'>
+                <div className='my-sing-page pt-10 w-full flex flex-col h-full items-center'>
                     <TextSpace line={true} text={locale == 'ru' ? item.title || item.title_ky : item.title_ky || item.title} />
                     <ImageLoader width={250} height={250} src={`https://online-back-8jc6.onrender.com${item.img}`} />
                     <div className='w-full px-9 text-white text-[16px] leading-[19.2px]  overflow-auto h-full'>
