@@ -46,7 +46,7 @@ export default function Index({ cat }: { cat: CategoryType }) {
         }
     }, [cat])
     return (
-        <div className='flex w-full flex-col h-[85vh] main-container '>
+        <div className='flex w-full flex-col h-[90vh] main-container '>
             {
                 changedItem ? <Single_Page item={changedItem} setClose={setChangeItem} /> : null
             }
