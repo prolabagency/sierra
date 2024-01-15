@@ -49,7 +49,7 @@ export default function Index({ data, error }: InferGetStaticPropsType<typeof ge
   const [activeIndex, setActiveIndex] = useState(0);
   return (
     <CartProvider>
-      <div className='w-full relative font-geo h-screen page-slide'>
+      <div className='current-page w-full relative font-geo h-screen page-slide'>
         <Header />
         <div className='sel-no w-full py-3 flex flex-col gap-4'>
           <Swiper

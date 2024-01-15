@@ -245,11 +245,14 @@
 
 
 body>div {
+  max-width: 370px;
+  margin: 0 auto;
+}
+
+
+.current-page {
   background-image: url('/Back.webp');
   /* background-position: center; */
   background-size: cover;
   background-repeat: no-repeat;
-  max-width: 370px;
-  margin: 0 auto;
-  height: 100vh;
 }
