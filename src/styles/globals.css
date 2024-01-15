@@ -251,4 +251,5 @@ body>div {
   background-repeat: no-repeat;
   max-width: 370px;
   margin: 0 auto;
+  height: 100vh;
 }
