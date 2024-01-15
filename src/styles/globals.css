@@ -242,15 +242,13 @@
   }
 }
 
-body {
+
+
+body>div {
   background-image: url('/Back.webp');
   /* background-position: center; */
   background-size: cover;
   background-repeat: no-repeat;
-}
-
-
-body>div {
   max-width: 370px;
   margin: 0 auto;
 }
