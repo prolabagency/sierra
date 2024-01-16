@@ -1,6 +1,6 @@
 'use client'
 import { CategoryType, FoodsType, SubcatType } from '@/types'
-import React, { ReactNode, SetStateAction, useEffect, useRef, useState } from 'react'
+import React, { SetStateAction, useEffect, useRef, useState } from 'react'
 import axios from '@/axios'
 import Loading from '../UI/Loading';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -12,12 +12,11 @@ import 'swiper/css/effect-coverflow';
 import CartCounter from '../cart/CartCounter';
 import Single_Page from '../popup/Single_Page';
 import ImageLoader from '../UI/ImageLoader';
-import SlideNextButton from '@/hoc/IsNextSlide';
 
 interface Props {
     data: SubcatType[] | null,
     error: string,
-    loading: boolean
+    loading?: boolean
 }
 
 
@@ -83,7 +82,7 @@ export default function Index({ cat, setPagin }: { cat: CategoryType, setPagin: 
                             setActiveSwipers((prev: any) => ({ ...prev, [swiper.activeIndex]: activeSwiper[swiper.activeIndex] }))
                             setACtivedItem(data.at(swiper.activeIndex - 1)?.value?.at(activeSwiper[swiper.activeIndex]))
                         } else {
-                            setActiveSwipers((prev: any) => ({ ...prev, [swiper.activeIndex]: 0 }))
+                            setActiveSwipers((prev: any) => ({ ...prev, [swiper.activeIndex - 1]: 0 }))
                             setACtivedItem(data.at(swiper.activeIndex - 1)?.value?.at(0))
                         }
                         setActivedCatIndex(swiper.activeIndex - 1)
