@@ -1,9 +1,9 @@
 import axios from "axios";
 
 
-
+const URL = process.env.NEXT_PUBLIC_MY_BASE_URL;
 const instanse = axios.create({
-    baseURL: 'https://online-back-8jc6.onrender.com',
+    baseURL: URL,
 })
 
 

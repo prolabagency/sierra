@@ -27,7 +27,8 @@ interface MyProps {
 
 export const getStaticProps: GetStaticProps<MyProps> = async () => {
   try {
-    const { data } = await axios.get(`/cafe/654a133aa65fe90bbbf657db`)
+    let myCafeId = process.env.MY_CAFE_ID;
+    const { data } = await axios.get(`/cafe/${myCafeId}`)
     return {
       props: {
         data: data.categories,
