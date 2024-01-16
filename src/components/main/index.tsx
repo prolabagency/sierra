@@ -56,7 +56,7 @@ export default function Index({ cat, setPagin }: { cat: CategoryType, setPagin: 
                                 return null
                             }
                             return (
-                               <FoodBlock category={item} setChangeItem={setChangeItem}/>
+                               <FoodBlock key={item._id} category={item} setChangeItem={setChangeItem}/>
                             )
                         })
                             : null

@@ -3,11 +3,11 @@ import React, { SetStateAction, useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import TextSpace from '../UI/TextSpace'
 import { EffectCoverflow, Pagination } from 'swiper/modules'
-import { CategoryType, FoodsType, SubcatType } from '@/types'
+import { FoodsType, SubcatType } from '@/types'
 import ImageLoader from '../UI/ImageLoader'
 import CartCounter from '../cart/CartCounter'
 
-export default function ({ category, setChangeItem }: { category: SubcatType, setChangeItem: React.Dispatch<SetStateAction<FoodsType | null>> }) {
+export default function FoodBlock({ category, setChangeItem }: { category: SubcatType, setChangeItem: React.Dispatch<SetStateAction<FoodsType | null>> }) {
     const { locale } = useRouter()
     const [activedItem, setACtivedItem] = useState<FoodsType | undefined>(undefined)
     useEffect(() => {
