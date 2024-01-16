@@ -7,7 +7,7 @@ export type CafeType = {
 export type CategoryType = {
     "_id": string,
     title: string,
-    title_ky: string
+    title_ky: string,
 }
 
 
@@ -42,5 +42,5 @@ export type SubcatType = {
     title: string
     title_ky: string
     updatedAt: string
-    value?: FoodsType[]
+    value: FoodsType[]
 }

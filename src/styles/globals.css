@@ -136,6 +136,12 @@
 }
 
 
+*::-webkit-scrollbar {
+  width: 0;
+  margin: 0;
+  padding: 0;
+}
+
 
 
 .on-line::after {
@@ -224,10 +230,27 @@
   z-index: 1000;
 }
 
+@keyframes opacited {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.text-fild {
+  animation: opacited .8s linear;
+}
+
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scrollbar-width: none;
+  scrollbar-color: transparent transparent;
 }
 
 .swiper {
