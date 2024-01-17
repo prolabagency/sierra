@@ -7,6 +7,9 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import axios from '@/axios'
 import TextSpace from '../UI/TextSpace'
+import ImageLoader from '../UI/ImageLoader'
+import CartCounter from '../cart/CartCounter'
+import Single_Page from '../popup/Single_Page'
 
 interface SearchDataProps {
     data: null | FoodsType[],
@@ -19,15 +22,22 @@ export default function Index() {
         loading: false
     })
     const { locale, asPath } = useRouter()
+    const [changedItem, setChangeItem] = useState<FoodsType | null>(null)
     const { state, dispatch } = useCart()
     const [search, setSearch] = useState('')
     const debouncedValue = useDebounce(search, 500)
-
+    const [focused, setFocused] = useState(false)
 
     useEffect(() => {
-        if (!search) return
+        if (!search) {
+            setFocused(false)
+            setState({ data: null, loading: false })
+            return
+        }
+        setFocused(true)
         setState(prev => ({ ...prev, loading: true }))
-        let response = axios.get(`/foods/654a133aa65fe90bbbf657db?search=${search}`)
+        const MY_CAFE_ID = process.env.NEXT_PUBLIC_MY_CAFE_ID
+        let response = axios.get(`/foods/${MY_CAFE_ID}?search=${search}`)
         response
             .then(res => setState({ data: res.data, loading: false }))
             .catch(() => setState({ data: null, loading: false }))
@@ -38,7 +48,7 @@ export default function Index() {
 
     return (
         <div className='w-full justify-center py-[17.5px] px-[16px] relative'>
-            <nav className='w-full  flex justify-between gap-10'>
+            <nav className='w-full z-50 relative  flex justify-between gap-10'>
                 <label className='flex border-b-2 items-center max-w-[210px]' htmlFor="search">
                     <svg className='w-4 h-4' width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" clipRule="evenodd" d="M7.68736 5.37528C7.31803 5.37528 6.95231 5.44802 6.61109 5.58935C6.26987 5.73069 5.95984 5.93784 5.69868 6.19898C5.43752 6.46013 5.23036 6.77015 5.08903 7.11136C4.94769 7.45256 4.87494 7.81826 4.87494 8.18758C4.87494 8.55689 4.94769 8.9226 5.08903 9.2638C5.23036 9.605 5.43752 9.91503 5.69868 10.1762C5.95984 10.4373 6.26987 10.6445 6.61109 10.7858C6.95231 10.9271 7.31803 10.9999 7.68736 10.9999C8.43326 10.9999 9.1486 10.7036 9.67603 10.1762C10.2035 9.64877 10.4998 8.93345 10.4998 8.18758C10.4998 7.44171 10.2035 6.72639 9.67603 6.19898C9.1486 5.67158 8.43326 5.37528 7.68736 5.37528ZM3 8.18758C2.99994 7.4568 3.17075 6.73613 3.49881 6.08311C3.82687 5.4301 4.30308 4.86284 4.88941 4.42662C5.47575 3.99041 6.15596 3.69733 6.87573 3.5708C7.59551 3.44426 8.3349 3.48777 9.03486 3.69786C9.73482 3.90794 10.376 4.27877 10.9071 4.78074C11.4382 5.28271 11.8446 5.90191 12.0938 6.58889C12.343 7.27588 12.4281 8.01161 12.3423 8.73734C12.2565 9.46307 12.0022 10.1587 11.5997 10.7686L12.7272 11.9011C12.9026 12.0774 13.0007 12.3162 13 12.5649C12.9993 12.8136 12.8998 13.0519 12.7235 13.2272C12.5471 13.4026 12.3083 13.5007 12.0596 13.5C11.8109 13.4993 11.5726 13.3998 11.3972 13.2235L10.276 12.096C9.56964 12.564 8.74962 12.8317 7.90319 12.8707C7.05676 12.9097 6.21559 12.7186 5.46914 12.3176C4.7227 11.9166 4.09891 11.3208 3.66413 10.5936C3.22935 9.86636 2.99983 9.03487 3 8.18758Z" fill="#F49D37" />
@@ -73,27 +83,62 @@ export default function Index() {
                     </div>
                 </div>
             </nav>
-            <div className='absolute scale-0 top-14 w-full left-0 flex px-4 min-h-[20vh] max-h-[80vh] overflow-auto z-30'>
-                <div className='bg-black bg-opacity-40 w-full rounded-xl p-2 flex justify-center relative items-center'>
-                    {/* {
-                        !loading ? <div className="grid min-h-[100px] w-full place-items-center overflow-x-scroll rounded-lg p-4 lg:overflow-visible">
-                            <svg className="w-16 h-16 animate-spin text-primary" viewBox="0 0 64 64" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-                                <path
-                                    d="M32 3C35.8083 3 39.5794 3.75011 43.0978 5.20749C46.6163 6.66488 49.8132 8.80101 52.5061 11.4939C55.199 14.1868 57.3351 17.3837 58.7925 20.9022C60.2499 24.4206 61 28.1917 61 32C61 35.8083 60.2499 39.5794 58.7925 43.0978C57.3351 46.6163 55.199 49.8132 52.5061 52.5061C49.8132 55.199 46.6163 57.3351 43.0978 58.7925C39.5794 60.2499 35.8083 61 32 61C28.1917 61 24.4206 60.2499 20.9022 58.7925C17.3837 57.3351 14.1868 55.199 11.4939 52.5061C8.801 49.8132 6.66487 46.6163 5.20749 43.0978C3.7501 39.5794 3 35.8083 3 32C3 28.1917 3.75011 24.4206 5.2075 20.9022C6.66489 17.3837 8.80101 14.1868 11.4939 11.4939C14.1868 8.80099 17.3838 6.66487 20.9022 5.20749C24.4206 3.7501 28.1917 3 32 3L32 3Z"
-                                    stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                <path
-                                    d="M32 3C36.5778 3 41.0906 4.08374 45.1692 6.16256C49.2477 8.24138 52.7762 11.2562 55.466 14.9605C58.1558 18.6647 59.9304 22.9531 60.6448 27.4748C61.3591 31.9965 60.9928 36.6232 59.5759 40.9762"
-                                    stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" className="text-gray-900">
-                                </path>
-                            </svg>
-                        </div> : null
-                    } */}
-                    {/* {
-                        data == null && !loading ?
-                            <TextSpace line={true} text={locale == 'ru' ? 'Не удалось найти :(' : "Табылган жок :("} />
+            <div className={`absolute ${focused ? 'search-active' : 'search-disactive'} w-full current-page bg-black bg-opacity-70 pt-14 left-0 top-0 flex justify-center h-screen overflow-auto z-20`}>
+                <div className=' w-full rounded-xl flex items-center relative flex-col text-center'>
+                    {changedItem ? <Single_Page item={changedItem} setClose={setChangeItem} /> : null}
+                    {
+                        loading ?
+                            <div className='h-full w-full flex items-center justify-center'>
+                                <div className="grid min-h-[100px] w-full place-items-center overflow-x-scroll rounded-lg p-4 lg:overflow-visible">
+                                    <svg className="w-16 h-16 animate-spin text-primary" viewBox="0 0 64 64" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                                        <path
+                                            d="M32 3C35.8083 3 39.5794 3.75011 43.0978 5.20749C46.6163 6.66488 49.8132 8.80101 52.5061 11.4939C55.199 14.1868 57.3351 17.3837 58.7925 20.9022C60.2499 24.4206 61 28.1917 61 32C61 35.8083 60.2499 39.5794 58.7925 43.0978C57.3351 46.6163 55.199 49.8132 52.5061 52.5061C49.8132 55.199 46.6163 57.3351 43.0978 58.7925C39.5794 60.2499 35.8083 61 32 61C28.1917 61 24.4206 60.2499 20.9022 58.7925C17.3837 57.3351 14.1868 55.199 11.4939 52.5061C8.801 49.8132 6.66487 46.6163 5.20749 43.0978C3.7501 39.5794 3 35.8083 3 32C3 28.1917 3.75011 24.4206 5.2075 20.9022C6.66489 17.3837 8.80101 14.1868 11.4939 11.4939C14.1868 8.80099 17.3838 6.66487 20.9022 5.20749C24.4206 3.7501 28.1917 3 32 3L32 3Z"
+                                            stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round"></path>
+                                        <path
+                                            d="M32 3C36.5778 3 41.0906 4.08374 45.1692 6.16256C49.2477 8.24138 52.7762 11.2562 55.466 14.9605C58.1558 18.6647 59.9304 22.9531 60.6448 27.4748C61.3591 31.9965 60.9928 36.6232 59.5759 40.9762"
+                                            stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" className="text-gray-900">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
                             : null
-                    } */}
+                    }
+                    {
+                        (data !== null && data.length < 1 && loading == false) ?
+                            <div className='h-full w-full flex items-center justify-center'>
+                                <TextSpace classn='w-full text-center' line={true} text={locale == 'ru' ? 'Не удалось найти :(' : "Табылган жок :("} />
+                            </div>
+                            : null
+                    }
+                    <div className='flex flex-col w-full'>
+                        {
+                            data && data.length > 0 ?
+                                data.map((item, index) => (
+                                    <div key={item._id} className={`${!(index % 2) ? 'right-line ' : 'left-line'} relative w-full overflow-hidden flex `}>
+                                        <div className='w-full cart-block justify-start my-5 flex px-4 relative gap-2 items-center'>
+                                            <ImageLoader width={100} height={100} src={`https://online-back-8jc6.onrender.com${item.img}`} />
+                                            <div className='w-full flex flex-col text-start justify-start items-start gap-1'>
+                                                <h1 className='text-white text-[24px] pl-1 '>{locale == 'ru' ? item.title ?? item.title_ky : item.title_ky ?? item.title} </h1>
+                                                <div className='flex items-center'>
+                                                    <div className=''>
+                                                        <button onClick={() => setChangeItem(item)} className='text-primary self-end mr-2 underline cursor-pointer'>{locale == 'ru' ? 'Подробно' : 'Маалымат'}</button>
+                                                        <div className='flex flex-col'>
+                                                            <div className='flex justify-between'>
+                                                                <CartCounter classn={'flex-col pt-2 justify-start items-start px-0'} item={item} />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                                : null
+                        }
+                    </div>
+
                 </div>
             </div>
         </div>

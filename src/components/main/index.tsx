@@ -3,16 +3,13 @@ import { CategoryType, FoodsType, SubcatType } from '@/types'
 import React, { SetStateAction, useEffect, useRef, useState } from 'react'
 import axios from '@/axios'
 import Loading from '../UI/Loading';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { useRouter } from 'next/router';
 import TextSpace from '../UI/TextSpace';
-import { EffectCoverflow, Pagination } from 'swiper/modules';
 import 'swiper/css/effect-coverflow';
-import CartCounter from '../cart/CartCounter';
 import Single_Page from '../popup/Single_Page';
-import ImageLoader from '../UI/ImageLoader';
 import FoodBlock from './FoodBlock';
+import VisibleComponent from '../UI/VisibleComponent';
 
 interface Props {
     data: SubcatType[] | null,
@@ -21,11 +18,11 @@ interface Props {
 }
 
 
-export default function Index({ cat, setPagin }: { cat: CategoryType, setPagin: React.Dispatch<SetStateAction<{ isNext: boolean, isPrev: boolean }>>, }) {
-    const swiperRef = useRef<any>()
-    
+export default function Index({ cat, setPagin }: { cat: CategoryType, setPagin: React.Dispatch<SetStateAction<boolean>>, }) {
+    const mainRef = useRef<HTMLDivElement | null>(null)
+
     const { locale } = useRouter()
-    const [{ data, loading, error }, setData] = useState<Props>({
+    const [{ data, loading }, setData] = useState<Props>({
         data: null,
         error: '',
         loading: true
@@ -41,7 +38,7 @@ export default function Index({ cat, setPagin }: { cat: CategoryType, setPagin: 
         }
     }, [cat])
     return (
-        <div className='flex w-full flex-col h-full overflow-auto main-container pb-20'>
+        <div ref={mainRef} className='flex w-full flex-col h-full overflow-auto main-container pb-20'>
             {
                 changedItem ? <Single_Page item={changedItem} setClose={setChangeItem} /> : null
             }
@@ -56,7 +53,7 @@ export default function Index({ cat, setPagin }: { cat: CategoryType, setPagin: 
                                 return null
                             }
                             return (
-                               <FoodBlock key={item._id} category={item} setChangeItem={setChangeItem}/>
+                                <FoodBlock key={item._id} category={item} setChangeItem={setChangeItem} />
                             )
                         })
                             : null
@@ -71,7 +68,7 @@ export default function Index({ cat, setPagin }: { cat: CategoryType, setPagin: 
                     </div>
                     : null
             }
-
+            <VisibleComponent main={mainRef.current} state={cat} next={setPagin} />
         </div >
     )
 }

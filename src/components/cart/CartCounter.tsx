@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useCart } from '@/hoc/CartContext'
-export default function CartCounter({ item }: { item: FoodsType }) {
+export default function CartCounter({ item, classn }: { item: FoodsType, classn?: string }) {
     const { state, dispatch } = useCart()
     const { locale } = useRouter()
     const [itemVal, setItemVal] = useState<any>({})
@@ -46,7 +46,7 @@ export default function CartCounter({ item }: { item: FoodsType }) {
     }
 
     return (
-        <div className='flex justify-between relative z-10 gap-5'>
+        <div className={`flex justify-between relative z-10 gap-5 ${classn}`}>
             <div className='text-white flex gap-3 items-center font-extrabold'>
                 <button className='w-5 h-5' onClick={handleMinus}>
                     <Image className='text-white ' height={20} width={20} src="/vectors/arrow.png" alt="-" />

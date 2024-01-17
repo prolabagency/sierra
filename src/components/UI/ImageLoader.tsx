@@ -9,13 +9,10 @@ export default function ImageLoader({ src, width, height }: ImageLoaderProps) {
     const [error, setError] = useState(false)
     return (
         <>
-            <img onError={(e) => {
-                console.log(e);
-                setError(true)
-            }} className={`${loading ? 'hidden' : ''}`} onLoad={() => setLoading(false)} width={width} height={height} src={src} alt="Img" />
+            <img onError={() => setError(true)} className={`${loading ? 'hidden' : ''}`} onLoad={() => setLoading(false)} width={width} height={height} src={src} alt="Img" />
             {
                 loading && !error ?
-                    <div className="grid min-h-[100px] w-full place-items-center overflow-x-scroll rounded-lg p-4 lg:overflow-visible">
+                    <div className={`grid max-h-[${height}] max-w-[${width}] w-full place-items-center overflow-x-scroll rounded-lg p-4 lg:overflow-visible`}>
                         <svg className="w-16 h-16 animate-spin text-primary" viewBox="0 0 64 64" fill="none"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24">
                             <path

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import axios from '@/axios'
 import Header from '@/components/header'
 import { CategoryType } from '@/types'
@@ -9,7 +9,6 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next/types';
 import Loading from '@/components/UI/Loading'
 import Main from '@/components/main'
 import { CartProvider } from '@/hoc/CartContext'
-import SlideNextButton from '@/hoc/IsNextSlide'
 
 
 
@@ -27,7 +26,8 @@ interface MyProps {
 
 export const getStaticProps: GetStaticProps<MyProps> = async () => {
   try {
-    let myCafeId = process.env.MY_CAFE_ID;
+    let myCafeId = process.env.NEXT_PUBLIC_MY_CAFE_ID;
+
     const { data } = await axios.get(`/cafe/${myCafeId}`)
     return {
       props: {
@@ -50,26 +50,17 @@ export default function Index({ data, error }: InferGetStaticPropsType<typeof ge
   const swiperRef = useRef<any>()
   const { locale } = useRouter()
   const [activeIndex, setActiveIndex] = useState(0);
-  const [{ isNext, isPrev }, setPag] = useState({
-    isNext: false,
-    isPrev: false,
-  })
+  const [isNext, setPag] = useState(false)
 
 
   const goToNextSlide = () => {
     if (swiperRef.current && swiperRef.current.swiper) {
       swiperRef.current.swiper.slideNext();
-      setPag(prev => ({ isNext: false, isPrev: false }))
+      setPag(false)
     }
   };
 
 
-  const goToPrevSlide = () => {
-    if (swiperRef.current && swiperRef.current.swiper) {
-      swiperRef.current.swiper.slidePrev();
-      setPag(prev => ({ isNext: false, isPrev: false }))
-    }
-  };
 
   if (isNext) {
     goToNextSlide()
@@ -77,15 +68,6 @@ export default function Index({ data, error }: InferGetStaticPropsType<typeof ge
       setActiveIndex(prev => prev + 1)
     } else if (data) {
       setActiveIndex(prev => 0)
-    }
-  }
-
-  if (isPrev) {
-    goToPrevSlide()
-    if (data && activeIndex > 0) {
-      setActiveIndex(prev => prev - 1)
-    } else if (data) {
-      setActiveIndex(prev => data.length - 1)
     }
   }
 

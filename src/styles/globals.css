@@ -58,6 +58,17 @@
 }
 
 
+.search-active {
+  transform: translateY(0) scale(1) ;
+  transition: transform .4s linear;
+}
+
+
+.search-disactive {
+  transform: translateY(-100%) scale(0) ;
+  transition: transform .4s linear;
+}
+
 
 
 .singe_page_container-closed {
@@ -281,7 +292,6 @@ body>div {
 
 .current-page {
   background-image: url('/Back.webp');
-  /* background-position: center; */
   background-size: cover;
   background-repeat: no-repeat;
 }
