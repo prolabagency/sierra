@@ -38,37 +38,44 @@ export default function Index({ cat, setPagin }: { cat: CategoryType, setPagin: 
         }
     }, [cat])
     return (
-        <div ref={mainRef} className='flex w-full flex-col h-full overflow-auto main-container pb-20'>
-            {
-                changedItem ? <Single_Page item={changedItem} setClose={setChangeItem} /> : null
-            }
-            {
-                loading ? <Loading /> : null
-            }
-            {
-                (data && data.length > 0) ?
-                    <div>
-                        {data && data.length > 0 ? data.map((item: SubcatType) => {
-                            if (!item.value?.length) {
-                                return null
-                            }
-                            return (
-                                <FoodBlock key={item._id} category={item} setChangeItem={setChangeItem} />
-                            )
-                        })
-                            : null
-                        }
-                    </div> : null
-            }
+        <>
+            <div className='flex w-full flex-col justify-between  overflow-auto h-screen pb-20   main-container'>
+                {
+                    changedItem ? <Single_Page item={changedItem} setClose={setChangeItem} /> : null
+                }
+                {
+                    loading ? <Loading /> : null
+                }
+                {
+                    (data && data.length > 0) ?
+                        <div ref={mainRef} className='block overflow-auto h-screen pb-20'>
+                            {data && data.length > 0 ? data.map((item: SubcatType) => {
+                                if (!item.value?.length) {
+                                    return null
+                                }
+                                return (
+                                    <FoodBlock key={item._id} category={item} setChangeItem={setChangeItem} />
+                                )
+                            })
 
-            {
-                (data?.length == 0) ?
-                    <div className={`w-full px-4 relative m-0 overflow-hidden h-full flex justify-center items-center page-slide`}>
-                        <TextSpace line={true} text={locale == 'ru' ? 'Ой а тут пусто :(' : "Ой бул жерде бош :("} />
-                    </div>
-                    : null
-            }
-            <VisibleComponent main={mainRef.current} state={cat} next={setPagin} />
-        </div >
+                                : null
+                            }
+                            {
+                                data && data.length ? <VisibleComponent main={mainRef.current} state={cat} next={setPagin} /> : null
+                            }
+                        </div> : null
+                }
+
+                {
+                    (data?.length == 0) ?
+                        <div className={`w-full px-4 relative m-0 overflow-hidden h-full flex justify-center items-center page-slide`}>
+                            <TextSpace line={true} text={locale == 'ru' ? 'Ой а тут пусто :(' : "Ой бул жерде бош :("} />
+                        </div>
+                        : null
+                }
+            </div >
+
+        </>
+
     )
 }

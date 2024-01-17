@@ -15,20 +15,28 @@ const VisibleComponent: React.FC<VisibleComponentProps> = ({ state, next, main }
             isVisible(componentRef.current);
         }
     };
-
+    const scrollHandler = () => handleVisible();
     const isVisible = function (target: HTMLDivElement) {
-        let targetPosition = {
-            top: window.pageYOffset + target.getBoundingClientRect().top,
-            left: window.pageXOffset + target.getBoundingClientRect().left,
-            right: window.pageXOffset + target.getBoundingClientRect().right,
-            bottom: window.pageYOffset + target.getBoundingClientRect().bottom
-        };
 
-        let windowPosition = {
-            top: window.pageYOffset,
-            left: window.pageXOffset,
-            right: window.pageXOffset + document.documentElement.clientWidth,
-            bottom: window.pageYOffset + document.documentElement.clientHeight
+        // let targetPosition = {
+        //     top: window.pageYOffset + target.getBoundingClientRect().top,
+        //     left: window.pageXOffset + target.getBoundingClientRect().left,
+        //     right: window.pageXOffset + target.getBoundingClientRect().right,
+        //     bottom: window.pageYOffset + target.getBoundingClientRect().bottom
+        // };
+
+        // let windowPosition = {
+        //     top: window.pageYOffset,
+        //     left: window.pageXOffset,
+        //     right: window.pageXOffset + document.documentElement.clientWidth,
+        //     bottom: window.pageYOffset + document.documentElement.clientHeight
+        // };
+        const targetPosition = target.getBoundingClientRect();
+        const windowPosition = {
+            top: 0,
+            left: 0,
+            right: document.documentElement.clientWidth,
+            bottom: document.documentElement.clientHeight
         };
 
         if (
@@ -37,29 +45,33 @@ const VisibleComponent: React.FC<VisibleComponentProps> = ({ state, next, main }
             targetPosition.right > windowPosition.left &&
             targetPosition.left < windowPosition.right
         ) {
+            main?.scrollTo({ top: 0, behavior: 'smooth' });
+            main?.removeEventListener('touchmove', scrollHandler);
+            main?.removeEventListener('scroll', handleVisible);
             next(true);
-            return main?.removeEventListener('scroll', handleVisible);
+            return
         }
+
+
     };
 
     useEffect(() => {
-        const scrollHandler = () => handleVisible();
         if (main) {
             setTimeout(() => {
                 main.addEventListener('scroll', scrollHandler);
-                main.addEventListener('touchmove', scrollHandler); // Добавить обработчик для события touchmove
+                main.addEventListener('touchmove', scrollHandler);
             }, 1000);
 
             return () => {
                 main.removeEventListener('scroll', scrollHandler);
-                main.removeEventListener('touchmove', scrollHandler); // Удалить обработчик для события touchmove
+                main.removeEventListener('touchmove', scrollHandler);
             };
         }
-    }, [state, main]);
+    }, [state]);
 
     return (
-        <div className='min-h-[150px] flex pt-[50px] w-full'>
-            <div className='min-h-[60px] w-full' ref={componentRef}>
+        <div className='bg-blue-500 bottom-0 relative w-full'>
+            <div className='min-h-[20px] w-full' ref={componentRef}>
                 {/* Ваш контент */}
             </div>
         </div>

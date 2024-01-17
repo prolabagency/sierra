@@ -12,7 +12,6 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" sizes="16x16" href="/favicon/favicon-16x16.png" />
         <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#262a2b" />
         <meta name="msapplication-TileColor" content="#000000" />
-        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover" />
         <meta name="theme-color" content="#00000"></meta>
         <link rel="manifest" href="/manifest.json" />
         <meta name="robots" content="index, follow"></meta>
