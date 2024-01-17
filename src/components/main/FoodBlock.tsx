@@ -15,7 +15,7 @@ export default function FoodBlock({ category, setChangeItem }: { category: Subca
     }, [category])
     return (
         <div className={`w-full h-screen flex flex-col mb-10`}>
-            <div className='h-[80vh] flex flex-col justify-between gap-5'>
+            <div className='h-[80vh] flex flex-col justify-between'>
                 <TextSpace classn='text-wrapped w-full' text={locale == 'ru' ? category.title || category.title_ky : category.title_ky || category.title} />
                 {
                     activedItem ?
@@ -46,7 +46,7 @@ export default function FoodBlock({ category, setChangeItem }: { category: Subca
                 >
                     {category.value.map((item: FoodsType, index) => {
                         return (
-                            <SwiperSlide className='h-full w-[80%] my-food-swiper min-w-[300px] myfood-swiper-slide' key={item._id}>
+                            <SwiperSlide className='h-full w-full my-food-swiper min-w-[300px] myfood-swiper-slide' key={item._id}>
                                 <div className={`w-full h-full flex justify-center items-center mb-4`}>
                                     <div className='w-full flex flex-col justify-center items-center gap-3'>
                                         <div className='w-full justify-center items-center flex h-full'>

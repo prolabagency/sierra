@@ -12,25 +12,11 @@ const VisibleComponent: React.FC<VisibleComponentProps> = ({ state, next, main }
 
     const handleVisible = () => {
         if (componentRef.current) {
-            isVisible(componentRef.current);
+            return isVisible(componentRef.current);
         }
     };
-    const scrollHandler = () => handleVisible();
+
     const isVisible = function (target: HTMLDivElement) {
-
-        // let targetPosition = {
-        //     top: window.pageYOffset + target.getBoundingClientRect().top,
-        //     left: window.pageXOffset + target.getBoundingClientRect().left,
-        //     right: window.pageXOffset + target.getBoundingClientRect().right,
-        //     bottom: window.pageYOffset + target.getBoundingClientRect().bottom
-        // };
-
-        // let windowPosition = {
-        //     top: window.pageYOffset,
-        //     left: window.pageXOffset,
-        //     right: window.pageXOffset + document.documentElement.clientWidth,
-        //     bottom: window.pageYOffset + document.documentElement.clientHeight
-        // };
         const targetPosition = target.getBoundingClientRect();
         const windowPosition = {
             top: 0,
@@ -38,6 +24,7 @@ const VisibleComponent: React.FC<VisibleComponentProps> = ({ state, next, main }
             right: document.documentElement.clientWidth,
             bottom: document.documentElement.clientHeight
         };
+        console.log('asdsad');
 
         if (
             targetPosition.bottom > windowPosition.top &&
@@ -46,25 +33,29 @@ const VisibleComponent: React.FC<VisibleComponentProps> = ({ state, next, main }
             targetPosition.left < windowPosition.right
         ) {
             main?.scrollTo({ top: 0, behavior: 'smooth' });
-            main?.removeEventListener('touchmove', scrollHandler);
+            main?.removeEventListener('touchmove', handleVisible);
             main?.removeEventListener('scroll', handleVisible);
-            next(true);
+            setTimeout(() => {
+                next(true);
+            }, 500)
             return
         }
 
 
     };
 
+
+
     useEffect(() => {
-        if (main) {
-            main.addEventListener('scroll', scrollHandler);
-            main.addEventListener('touchmove', scrollHandler);
+        if (main && componentRef.current) {
+            main.addEventListener('scroll', handleVisible);
+            main.addEventListener('touchmove', handleVisible);
             return () => {
-                main.removeEventListener('scroll', scrollHandler);
-                main.removeEventListener('touchmove', scrollHandler);
+                main.removeEventListener('scroll', handleVisible);
+                main.removeEventListener('touchmove', handleVisible);
             };
         }
-    }, [state]);
+    }, [state, main, next]);
 
     return (
         <div className='bottom-0 relative w-full'>
