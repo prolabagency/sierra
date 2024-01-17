@@ -47,7 +47,7 @@ const VisibleComponent: React.FC<VisibleComponentProps> = ({ state, next, main }
     }, [state])
 
     return (
-        <div className='min-h-[150px] flex pt-[75px] w-full'>
+        <div className='min-h-[150px] flex pt-[50px] w-full'>
             <div className='min-h-[60px] w-full' ref={componentRef}>
             </div>
         </div>
