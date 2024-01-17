@@ -57,11 +57,8 @@ const VisibleComponent: React.FC<VisibleComponentProps> = ({ state, next, main }
 
     useEffect(() => {
         if (main) {
-            setTimeout(() => {
-                main.addEventListener('scroll', scrollHandler);
-                main.addEventListener('touchmove', scrollHandler);
-            }, 1000);
-
+            main.addEventListener('scroll', scrollHandler);
+            main.addEventListener('touchmove', scrollHandler);
             return () => {
                 main.removeEventListener('scroll', scrollHandler);
                 main.removeEventListener('touchmove', scrollHandler);
@@ -70,7 +67,7 @@ const VisibleComponent: React.FC<VisibleComponentProps> = ({ state, next, main }
     }, [state]);
 
     return (
-        <div className='bg-blue-500 bottom-0 relative w-full'>
+        <div className='bottom-0 relative w-full'>
             <div className='min-h-[20px] w-full' ref={componentRef}>
                 {/* Ваш контент */}
             </div>
