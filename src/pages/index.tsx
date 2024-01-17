@@ -12,7 +12,6 @@ import { CartProvider } from '@/hoc/CartContext'
 
 
 
-
 interface MyProps {
   data: CategoryType[] | null,
   error: string
