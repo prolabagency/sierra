@@ -60,7 +60,7 @@ export default function Index({ cat, setPagin }: { cat: CategoryType, setPagin: 
                             : null
                         }
                         {
-                            data && data.length ? <VisibleComponent main={mainRef.current} state={cat} next={setPagin} /> : null
+                            data && data.length && mainRef.current ? <VisibleComponent main={mainRef.current} state={cat} next={setPagin} /> : null
                         }
                     </div> : null
             }
