@@ -13,6 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#262a2b" />
         <meta name="msapplication-TileColor" content="#000000" />
         <meta name="theme-color" content="#00000"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
         <link rel="manifest" href="/manifest.json" />
         <meta name="robots" content="index, follow"></meta>
         <meta name="apple-mobile-web-app-status-bar-style" content="black"></meta>
