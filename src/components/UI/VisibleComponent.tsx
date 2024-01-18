@@ -57,7 +57,7 @@ const VisibleComponent: React.FC<VisibleComponentProps> = ({ state, next, main }
                 main.removeEventListener('touchmove', handleVisible);
             };
         }
-    }, [state, main]);
+    }, [state, main, componentRef]);
 
     return (
         <div className='bottom-6 relative w-full'>

@@ -283,12 +283,18 @@
   }
 }
 
+body {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
 
 
 body>div {
   max-width: 410px;
-  margin: 0 auto;
   width: 100%;
+
   position: absolute;
 }
 
