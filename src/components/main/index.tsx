@@ -38,44 +38,40 @@ export default function Index({ cat, setPagin }: { cat: CategoryType, setPagin: 
         }
     }, [cat])
     return (
-        <>
-            <div className='flex w-full flex-col justify-between  overflow-auto h-screen pb-20   main-container'>
-                {
-                    changedItem ? <Single_Page item={changedItem} setClose={setChangeItem} /> : null
-                }
-                {
-                    loading ? <Loading /> : null
-                }
-                {
-                    (data && data.length > 0) ?
-                        <div ref={mainRef} className='block overflow-auto h-screen pb-20'>
-                            {data && data.length > 0 ? data.map((item: SubcatType) => {
-                                if (!item.value?.length) {
-                                    return null
-                                }
-                                return (
-                                    <FoodBlock key={item._id} category={item} setChangeItem={setChangeItem} />
-                                )
-                            })
-
-                                : null
+        <div className='flex w-full flex-col justify-between main-container h-full'>
+            {
+                changedItem ? <Single_Page item={changedItem} setClose={setChangeItem} /> : null
+            }
+            {
+                loading ? <Loading /> : null
+            }
+            {
+                (data && data.length > 0) ?
+                    <div ref={mainRef} className='relative overflow-auto h-screen pb-20'>
+                        {data && data.length > 0 ? data.map((item: SubcatType) => {
+                            if (!item.value?.length) {
+                                return null
                             }
-                            {
-                                data && data.length ? <VisibleComponent main={mainRef.current} state={cat} next={setPagin} /> : null
-                            }
-                        </div> : null
-                }
+                            return (
+                                <FoodBlock key={item._id} category={item} setChangeItem={setChangeItem} />
+                            )
+                        })
 
-                {
-                    (data?.length == 0) ?
-                        <div className={`w-full px-4 relative m-0 overflow-hidden h-full flex justify-center items-center page-slide`}>
-                            <TextSpace line={true} text={locale == 'ru' ? 'Ой а тут пусто :(' : "Ой бул жерде бош :("} />
-                        </div>
-                        : null
-                }
-            </div >
+                            : null
+                        }
+                        {
+                            data && data.length ? <VisibleComponent main={mainRef.current} state={cat} next={setPagin} /> : null
+                        }
+                    </div> : null
+            }
 
-        </>
-
+            {
+                (data?.length == 0) ?
+                    <div className={`w-full px-4 relative m-0 overflow-hidden h-full flex justify-center items-center page-slide`}>
+                        <TextSpace line={true} text={locale == 'ru' ? 'Ой а тут пусто :(' : "Ой бул жерде бош :("} />
+                    </div>
+                    : null
+            }
+        </div >
     )
 }

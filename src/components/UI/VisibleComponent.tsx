@@ -1,17 +1,19 @@
 import { CategoryType } from '@/types';
-import React, { SetStateAction, useEffect, useRef } from 'react';
+import React, { SetStateAction, useEffect, useRef, useState } from 'react';
 
 interface VisibleComponentProps {
     state: CategoryType,
-    next: React.Dispatch<SetStateAction<any>>,
+    next: React.Dispatch<SetStateAction<boolean>>,
     main: HTMLDivElement | null
 }
 
 const VisibleComponent: React.FC<VisibleComponentProps> = ({ state, next, main }) => {
     const componentRef = useRef<HTMLDivElement | null>(null);
+    const [isScrolling, setScrolling] = useState(false)
 
     const handleVisible = () => {
-        if (componentRef.current) {
+        if (componentRef.current && !isScrolling) {
+            setScrolling(true)
             return isVisible(componentRef.current);
         }
     };
@@ -24,8 +26,6 @@ const VisibleComponent: React.FC<VisibleComponentProps> = ({ state, next, main }
             right: document.documentElement.clientWidth,
             bottom: document.documentElement.clientHeight
         };
-        console.log('asdsad');
-
         if (
             targetPosition.bottom > windowPosition.top &&
             targetPosition.top < windowPosition.bottom &&
@@ -36,31 +36,32 @@ const VisibleComponent: React.FC<VisibleComponentProps> = ({ state, next, main }
             main?.removeEventListener('touchmove', handleVisible);
             main?.removeEventListener('scroll', handleVisible);
             setTimeout(() => {
-                next(true);
+                next(prev => prev == true ? false : true);
+                setScrolling(false)
             }, 500)
             return
         }
-
-
     };
 
 
 
     useEffect(() => {
         if (main && componentRef.current) {
-            main.addEventListener('scroll', handleVisible);
-            main.addEventListener('touchmove', handleVisible);
+            main.scrollTo({ top: 0, behavior: 'smooth' })
+            if (!isScrolling) {
+                main.addEventListener('scroll', handleVisible);
+                main.addEventListener('touchmove', handleVisible);
+            }
             return () => {
                 main.removeEventListener('scroll', handleVisible);
                 main.removeEventListener('touchmove', handleVisible);
             };
         }
-    }, [state, main, next]);
+    }, [state, main]);
 
     return (
-        <div className='bottom-0 relative w-full'>
+        <div className='bottom-6 relative w-full'>
             <div className='min-h-[20px] w-full' ref={componentRef}>
-                {/* Ваш контент */}
             </div>
         </div>
     );

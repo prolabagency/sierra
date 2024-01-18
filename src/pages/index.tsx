@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import axios from '@/axios'
 import Header from '@/components/header'
 import { CategoryType } from '@/types'
@@ -59,16 +59,17 @@ export default function Index({ data, error }: InferGetStaticPropsType<typeof ge
     }
   };
 
-
-
-  if (isNext) {
-    goToNextSlide()
-    if (data && data?.length - 1 > activeIndex) {
-      setActiveIndex(prev => prev + 1)
-    } else if (data) {
-      setActiveIndex(prev => 0)
+  useEffect(() => {
+    if (isNext) {
+      goToNextSlide()
+      if (data && data?.length - 1 > activeIndex) {
+        setActiveIndex(prev => prev + 1)
+      } else if (data) {
+        setActiveIndex(prev => 0)
+      }
     }
-  }
+  }, [isNext])
+
 
 
   return (

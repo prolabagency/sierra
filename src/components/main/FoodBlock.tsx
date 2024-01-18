@@ -7,14 +7,14 @@ import { FoodsType, SubcatType } from '@/types'
 import ImageLoader from '../UI/ImageLoader'
 import CartCounter from '../cart/CartCounter'
 
-export default function FoodBlock({ category, setChangeItem }: { category: SubcatType, setChangeItem: React.Dispatch<SetStateAction<FoodsType | null>> }) {
+export default function FoodBlock({ category, setChangeItem }: { category: SubcatType, setChangeItem: React.Dispatch<SetStateAction<FoodsType | null>>}) {
     const { locale } = useRouter()
     const [activedItem, setACtivedItem] = useState<FoodsType | undefined>(undefined)
     useEffect(() => {
         setACtivedItem(category.value[0])
     }, [category])
     return (
-        <div className={`w-full h-screen flex flex-col mb-10`}>
+        <div className={`w-full h-screen flex flex-col`}>
             <div className='h-[80vh] flex flex-col justify-between'>
                 <TextSpace classn='text-wrapped w-full' text={locale == 'ru' ? category.title || category.title_ky : category.title_ky || category.title} />
                 {

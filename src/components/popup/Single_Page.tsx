@@ -32,7 +32,7 @@ export default function Single_Page({ item, setClose }: { item: FoodsType, setCl
     }
     const recipe = locale == 'ru' ? item.recipe : item.recipe_ky
     return (
-        <div className={`absolute left-0 top-0 z-30 w-full h-full singe_page_container flex ${disActived ? 'singe_page_container-closed' : ''} justify-center items-center popup-modal pt-5`}>
+        <div className={`absolute left-0 top-0 z-50 w-full h-full singe_page_container flex ${disActived ? 'singe_page_container-closed' : ''} justify-center items-center popup-modal pt-5`}>
             <div className='relative w-full h-screen'>
                 <button className='absolute top-3 right-4 z-40' onClick={() => {
                     setDis(true)
