@@ -6,6 +6,8 @@ import { EffectCoverflow, Pagination } from 'swiper/modules'
 import { FoodsType, SubcatType } from '@/types'
 import ImageLoader from '../UI/ImageLoader'
 import CartCounter from '../cart/CartCounter'
+const BASE_URL = process.env.NEXT_PUBLIC_MY_BASE_URL;
+
 
 export default function FoodBlock({ category, setChangeItem }: { category: SubcatType, setChangeItem: React.Dispatch<SetStateAction<FoodsType | null>>}) {
     const { locale } = useRouter()
@@ -50,7 +52,7 @@ export default function FoodBlock({ category, setChangeItem }: { category: Subca
                                 <div className={`w-full h-full flex justify-center items-center mb-4`}>
                                     <div className='w-full flex flex-col justify-center items-center gap-3'>
                                         <div className='w-full justify-center items-center flex h-full'>
-                                            <ImageLoader width={250} height={250} src={`https://online-back-8jc6.onrender.com${item.img}`} />
+                                            <ImageLoader width={250} height={250} src={`${BASE_URL}${item.img}`} />
                                         </div>
                                     </div>
                                 </div>

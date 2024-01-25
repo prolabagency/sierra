@@ -10,6 +10,7 @@ import TextSpace from '../UI/TextSpace'
 import ImageLoader from '../UI/ImageLoader'
 import CartCounter from '../cart/CartCounter'
 import Single_Page from '../popup/Single_Page'
+const BASE_URL = process.env.NEXT_PUBLIC_MY_BASE_URL;
 
 interface SearchDataProps {
     data: null | FoodsType[],
@@ -117,7 +118,7 @@ export default function Index() {
                                 data.map((item, index) => (
                                     <div key={item._id} className={`${!(index % 2) ? 'right-line ' : 'left-line'} relative w-full overflow-hidden flex `}>
                                         <div className='w-full cart-block justify-start my-5 flex px-4 relative gap-2 items-center'>
-                                            <ImageLoader width={100} height={100} src={`https://online-back-8jc6.onrender.com${item.img}`} />
+                                            <ImageLoader width={100} height={100} src={`${BASE_URL}${item.img}`} />
                                             <div className='w-full flex flex-col text-start justify-start items-start gap-1'>
                                                 <h1 className='text-white text-[24px] pl-1 '>{locale == 'ru' ? item.title ?? item.title_ky : item.title_ky ?? item.title} </h1>
                                                 <div className='flex items-center'>

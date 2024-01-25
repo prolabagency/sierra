@@ -6,6 +6,8 @@ import { useRouter } from 'next/router'
 import TextSpace from '../UI/TextSpace'
 import Link from 'next/link'
 import ImageLoader from '../UI/ImageLoader'
+const BASE_URL = process.env.NEXT_PUBLIC_MY_BASE_URL;
+
 
 export default function Layout() {
     const { state, dispatch } = useCart()
@@ -52,7 +54,7 @@ export default function Layout() {
                                     <path d="M14.5 9.5L9.5 14.5M9.5 9.5L14.5 14.5" stroke="#DE9393" strokeWidth="1.5" strokeLinecap="round" />
                                 </svg>
                             </button>
-                            <ImageLoader width={100} height={100} src={`https://online-back-8jc6.onrender.com${item.img}`} />
+                            <ImageLoader width={100} height={100} src={`${BASE_URL}${item.img}`} />
                             <div className='w-full flex flex-col justify-start gap-1'>
                                 <h1 className='text-white text-[24px] pl-1 '>{locale == 'ru' ? item.title ?? item.title_ky : item.title_ky ?? item.title} </h1>
                                 <div className='flex items-center'>

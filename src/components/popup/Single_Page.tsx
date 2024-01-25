@@ -5,6 +5,7 @@ import Image from 'next/image'
 import TextSpace from '../UI/TextSpace'
 import { useCart } from '@/hoc/CartContext'
 import ImageLoader from '../UI/ImageLoader'
+const BASE_URL = process.env.NEXT_PUBLIC_MY_BASE_URL;
 
 export default function Single_Page({ item, setClose }: { item: FoodsType, setClose: React.Dispatch<SetStateAction<FoodsType | null>> }) {
     const { state, dispatch } = useCart()
@@ -47,7 +48,7 @@ export default function Single_Page({ item, setClose }: { item: FoodsType, setCl
                 </button>
                 <div className='my-sing-page pt-10 w-full flex flex-col h-full items-center'>
                     <TextSpace line={true} text={locale == 'ru' ? item.title || item.title_ky : item.title_ky || item.title} />
-                    <ImageLoader width={250} height={250} src={`https://online-back-8jc6.onrender.com${item.img}`} />
+                    <ImageLoader width={250} height={250} src={`${BASE_URL}${item.img}`} />
                     <div className='w-full px-9 text-white text-[16px] leading-[19.2px]  overflow-auto h-full'>
                         <p className='pb-2'>{locale == 'ru' ? 'Описание:' : 'Маалымат:'}</p>
                         <p className='text-white font-light  pl-[6px] pb-4'>{locale == 'ru' ? item.desc || item.desc_ky : item.desc_ky || item.desc}</p>
